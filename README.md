@@ -53,7 +53,7 @@ Simply open index.html in your browser and enjoy the uselessness.
 ### Project Documentation
 # Screenshots
 *This is the homepage of Useless Hub, where pointless creativity starts.*
-<img width="1914" height="1019" alt="Screenshot 2025-08-02 071127" src="https://github.com/user-attachments/assets/92300452-5fa0-445e-89d5-4d6fc040df24" />
+<img width="1911" height="1027" alt="Screenshot 2025-08-02 070438" src="https://github.com/user-attachments/assets/2e631541-f2f7-42d2-9ddd-5073c41bda14" />
 
 *Bend time by moving your mouse!*
 <img width="1919" height="1027" alt="Screenshot 2025-08-02 070710" src="https://github.com/user-attachments/assets/d75b6a94-e1da-4c6a-b9fb-617c4ab85fbe" />
@@ -66,7 +66,7 @@ Simply open index.html in your browser and enjoy the uselessness.
 <img width="1919" height="1028" alt="Screenshot 2025-08-02 070505" src="https://github.com/user-attachments/assets/9f0bd5b3-0d96-456a-a122-5de201980d2d" />
 
 Start to read reversely
-<img width="1911" height="1027" alt="Screenshot 2025-08-02 070438" src="https://github.com/user-attachments/assets/2e631541-f2f7-42d2-9ddd-5073c41bda14" />
+<img width="1914" height="1019" alt="Screenshot 2025-08-02 071127" src="https://github.com/user-attachments/assets/92300452-5fa0-445e-89d5-4d6fc040df24" />
 
 
 
