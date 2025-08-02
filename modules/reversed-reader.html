@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reversed Reader - Speech Mode</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #111;
+      color: #00ffcc;
+      text-align: center;
+      margin-top: 10%;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background-color: #00ffcc;
+      color: #111;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00ffaa;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔊 Reversed Reader</h2>
+  <p>This tool reads all visible text on this page in reverse using speech.</p>
+<button onclick="window.open('https://www.google.com', '_blank')">🌐 Go to Google</button>
+
+  <script>
+    function getVisibleText() {
+      let walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode: node => {
+          return node.parentNode.offsetParent !== null ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      let text = '';
+      while (walker.nextNode()) {
+        text += walker.currentNode.nodeValue + ' ';
+      }
+      return text.trim();
+    }
+
+    function reverseText(text) {
+      return text.split('').reverse().join('');
+    }
+
+    function speakReversedText() {
+      let text = getVisibleText();
+      let reversed = reverseText(text);
+      let utterance = new SpeechSynthesisUtterance(reversed);
+      utterance.lang = 'en-US'; // or 'en-IN'
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      speechSynthesis.cancel(); // Stop any ongoing speech
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
+

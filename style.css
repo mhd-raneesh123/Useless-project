@@ -1,0 +1,154 @@
+/* Import a modern, clean font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --accent-color: #00ffc8; /* A vibrant, modern green/cyan color */
+    --hover-color: #00e0b3;
+    --logo-color: #3b82f6; /* A clean blue for the logo */
+    --link-bg: #2a2a2a;
+    --link-border: #444444;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background-color: var(--logo-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--logo-color);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.main-title {
+    font-size: 3.5em;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--accent-color);
+    color: var(--text-color);
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.buttons a {
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--link-bg);
+    border: 2px solid var(--link-border);
+    border-radius: 12px;
+    padding: 25px;
+    font-size: 1.6em;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.buttons a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 255, 200, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 15px var(--logo-color); }
+    50% { box-shadow: 0 0 25px var(--logo-color); }
+    100% { box-shadow: 0 0 15px var(--logo-color); }
+}
+.rocket {
+    position: fixed;
+    top: 20%;
+    left: -50px;
+    font-size: 2rem;
+    animation: flyAround 20s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes flyAround {
+    0% {
+        transform: translateX(0) translateY(0) rotate(10deg);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateX(25vw) translateY(10vh) rotate(20deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateX(60vw) translateY(-15vh) rotate(0deg);
+        opacity: 1;
+    }
+    75% {
+        transform: translateX(85vw) translateY(20vh) rotate(-20deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateX(100vw) translateY(0) rotate(-10deg);
+        opacity: 0.3;
+    }}
+.rocket1 {
+  animation-delay: 0s;
+  top: 20%;
+}
+
+.rocket2 {
+  animation-delay: 5s;
+  top: 40%;
+}
+
+.rocket3 {
+  animation-delay: 10s;
+  top: 60%;
+}
+.rocket2 {
+  font-size: 1.5rem;
+  transform: scaleX(-1); /* make it fly reversed */
+}
+
+.rocket3 {
+  opacity: 0.8;
+}
+

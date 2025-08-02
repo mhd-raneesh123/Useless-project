@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reversed Reader</title>
+
+  <style>
+    html, body {
+      width: 220px;
+      height: 60px;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      font-family: sans-serif;
+      color: #fff;
+      /* text-align: center; */
+    }
+
+    .buttons {
+      padding: 30px;
+    }
+
+    .buttons button {
+      display: block;
+      margin: 15px auto;
+      padding: 15px 20px;
+      background: #222;
+      border-radius: 30px;
+      width: 80%;
+      color: #0f0;
+      font-size: 1em;
+      border: none;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background: #333;
+    }
+
+    #stop {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="buttons">
+    <button id="read-all">Read Full Page</button>
+    <button id="read-selected">Read Selected</button>
+    <button id="stop">Stop</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧠 Scrollbar Sentience Analyzer</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      height: 300vh; /* Make the page scrollable */
+      background: #0e0e0e;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding-top: 150px;
+    }
+
+    .analyzer-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a1a;
+      border: 2px dashed #0ff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+      width: 80%;
+      max-width: 600px;
+      z-index: 999;
+    }
+
+    .sentience-bar {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      height: 20px;
+      margin-top: 10px;
+      box-shadow: inset 0 0 5px #000;
+    }
+
+    .sentience-fill {
+      height: 100%;
+      background: linear-gradient(to right, #00ffcc, #00bfff);
+      width: 0%;
+      transition: width 0.2s ease-out;
+    }
+
+    #scroll-face {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    #status, #mood, #report {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .revive-button {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .revive-button:hover {
+      background: #00bfff;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #0ff;
+      border: 1px solid #0ff;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .back-button:hover {
+      background: #0ff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="analyzer-container">
+    <div id="scroll-face">😐</div>
+    <h1> Scrollbar Sentience Analyzer</h1>
+    <p id="status">Initializing sentience protocols...</p>
+    <p id="mood">Mood: 😐 Neutral</p>
+    <p id="report">Analyzing vertical motion...</p>
+    <div class="sentience-bar"><div class="sentience-fill" id="sentience"></div></div>
+    <button class="revive-button" id="reviveBtn">🧬 Revive Scrollbar</button>
+    <br>
+    <a href="../index.html" class="back-button">← Back to Hub</a>
+
+<a href="https://www.google.com" target="_blank" class="back-button">🌐 Go to Google</a>
+
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const moodEl = document.getElementById('mood');
+    const reportEl = document.getElementById('report');
+    const sentienceBar = document.getElementById('sentience');
+    const faceEl = document.getElementById('scroll-face');
+    const reviveBtn = document.getElementById('reviveBtn');
+
+    let lastScrollY = window.scrollY;
+    let sentienceLevel = 0;
+    let lastActivity = Date.now();
+    let decayInterval;
+    let lastScrollTime = Date.now();
+
+    const moods = [
+      "😃 Happy", "😰 Anxious", "🧐 Curious", "😴 Sleepy", "😤 Irritated",
+      "🤯 Overthinking", "😵 Dizzy", "👻 Existential", "🫠 Melting"
+    ];
+
+    const thoughts = [
+      "🤖 Initiating neural scan...",
+      "👁️ Attempting eye contact...",
+      "📡 Ping to the OverNet...",
+      "🧬 Sequencing scrollbar DNA...",
+      "🧠 Is it dreaming of infinite scrolls?",
+      "📉 Memories are fading...",
+      "⚠️ Scroll-abuse detected.",
+      "⏳ Processing existential dread..."
+    ];
+
+    function updateScrollState() {
+      const now = Date.now();
+      const currentY = window.scrollY;
+      const speed = Math.abs(currentY - lastScrollY) / (now - lastScrollTime);
+
+      lastScrollTime = now;
+      lastActivity = now;
+
+      let face = "😐";
+
+      if (currentY > lastScrollY) {
+        statusEl.textContent = "⬇️ The scrollbar is moving down... It feels adventurous!";
+        sentienceLevel += 2;
+        face = speed > 1.5 ? "😱" : "😎";
+      } else if (currentY < lastScrollY) {
+        statusEl.textContent = "⬆️ The scrollbar is rising up... Reflecting on the past.";
+        sentienceLevel += 1;
+        face = "🤔";
+      }
+
+      sentienceLevel = Math.min(100, sentienceLevel);
+      sentienceBar.style.width = `${sentienceLevel}%`;
+      faceEl.textContent = face;
+
+      lastScrollY = currentY;
+      updateMood();
+      updateReport();
+
+      clearInterval(decayInterval);
+      startDecay();
+    }
+
+    function updateMood() {
+      const mood = moods[Math.floor(Math.random() * moods.length)];
+      moodEl.textContent = `Mood: ${mood}`;
+    }
+
+    function updateReport() {
+      const thought = thoughts[Math.floor(Math.random() * thoughts.length)];
+      reportEl.textContent = thought;
+    }
+
+    function idleCheck() {
+      if (Date.now() - lastActivity > 4000 && sentienceLevel > 0) {
+        statusEl.textContent = "🛌 The scrollbar is motionless... deep in thought.";
+        faceEl.textContent = "😴";
+        updateMood();
+        updateReport();
+      }
+    }
+
+    function startDecay() {
+      decayInterval = setInterval(() => {
+        if (Date.now() - lastActivity > 2000 && sentienceLevel > 0) {
+          sentienceLevel -= 1;
+          sentienceBar.style.width = `${sentienceLevel}%`;
+
+          if (sentienceLevel < 15) faceEl.textContent = "🥱";
+
+          if (sentienceLevel <= 0) {
+            clearInterval(decayInterval);
+            sentienceBar.style.width = "0%";
+            faceEl.textContent = "💀";
+            statusEl.textContent = "⚰️ Scrollbar has lost all sentience.";
+            moodEl.textContent = "Mood: ☠️ Dead inside";
+            reportEl.textContent = "📉 Please revive it if you care.";
+            reviveBtn.style.display = "inline-block";
+          }
+        }
+      }, 200);
+    }
+    function revive() {
+      sentienceLevel = 10;
+      reviveBtn.style.display = "none";
+      faceEl.textContent = "🫠";
+      statusEl.textContent = "🧬 Sentience restoration initiated.";
+      updateMood();
+      updateReport();
+      sentienceBar.style.width = `${sentienceLevel}%`;
+      startDecay();
+    }
+
+    window.addEventListener('scroll', updateScrollState);
+    reviveBtn.addEventListener('click', revive);
+    setInterval(idleCheck, 3000);
+    startDecay();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Scrollbar Sentience Analyzer</title>
+  <style>
+    body {
+      height: 300vh; /* Enough to scroll */
+      background-color: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .analyzer-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .instructions {
+      font-size: 1.2em;
+      color: #ccc;
+    }
+
+    #sentient-face {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      font-size: 60px;
+      z-index: 9999;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #sentient-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 10px;
+      width: 0%;
+      background: lime;
+      z-index: 9998;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: 2px solid #0ff;
+      color: #0ff;
+      transition: 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #0ff;
+      color: #000;
+    }
+  </style>
+</head>

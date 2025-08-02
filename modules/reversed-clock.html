@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌀 Mouse Time Dilation Clock</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #00ffc8;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .clock {
+      font-size: 5em;
+      background: #222;
+      padding: 40px 60px;
+      border-radius: 20px;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Mouse Time Dilation Clock</h1>
+  <div class="clock" id="clock">00:00:00</div>
+  <div class="info">Move your mouse away from center to speed up or reverse time.</div>
+
+  <script>
+    const clockEl = document.getElementById('clock');
+
+    let virtualTime = new Date();
+    let speedMultiplier = 1;
+
+    function updateClock() {
+      // Advance virtual time by multiplier
+      virtualTime = new Date(virtualTime.getTime() + 1000 * speedMultiplier);
+
+      const h = String(virtualTime.getHours()).padStart(2, '0');
+      const m = String(virtualTime.getMinutes()).padStart(2, '0');
+      const s = String(virtualTime.getSeconds()).padStart(2, '0');
+
+      clockEl.textContent = `${h}:${m}:${s}`;
+    }
+
+    function handleMouseMove(e) {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      const dx = e.clientX - centerX;
+      const dy = e.clientY - centerY;
+
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+
+      // Scale speed: from -3 (reverse fast) to +3 (fast forward)
+      speedMultiplier = ((distance / maxDistance) * 6 - 3).toFixed(2);
+      speedMultiplier = parseFloat(speedMultiplier);
+    }
+
+    // Initial setup
+    document.addEventListener('mousemove', handleMouseMove);
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>

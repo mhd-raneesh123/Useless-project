@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Reversed Reader",
+  "version": "1.0",
+  "description": "Reads text from any webpage in reverse using speech.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Read Page Reversely",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon_16.png",
+      "48": "icon_48.png",
+      "128": "icon_128.png"
+    }
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
